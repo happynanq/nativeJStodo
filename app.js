@@ -2,7 +2,7 @@ let todoInput = document.querySelector('#todo-input')
 let cnt = document.querySelector(".cnt")
 
 const state = {
-  state:"wewe",
+  state:[],
   getState : function(){
     return this.state
   },
@@ -21,15 +21,30 @@ todoInput.addEventListener('keydown', (e) => {
       e.target.value = ''
       return
     }
-    drawTodo(e.target.value)
+    state.setState([...state.getState(), {text: e.target.value} ])
+    drawTodo()
+    e.target.value = ''
+
   }
 })
 
-function drawTodo(text) {
-  console.log(text)
+function drawTodo() {
+  let todos = document.querySelector('.todos')
+  todos.remove()
+  let newTodos = document.createElement("div")
+  newTodos.classList.add("todos")
+
+  state.getState().map((todo)=>{
+    addChild(todo.text, newTodos)
+  })
+  cnt.appendChild(newTodos)
+
+  
+
+}
+function addChild(text, element){
   let div = document.createElement('div')
   div.classList.add('collection')
-  console.log(div)
 
 
   let a = document.createElement('a')
@@ -53,8 +68,7 @@ function drawTodo(text) {
   span.appendChild(i2)
 
   div.appendChild(a)
-  console.log(div)
-  cnt.appendChild(div)
+  element.appendChild(div)
 }
 /* 
 <div class="collection">
