@@ -1,5 +1,18 @@
 let todoInput = document.querySelector('#todo-input')
 let cnt = document.querySelector(".cnt")
+
+const state = {
+  state:"wewe",
+  getState : function(){
+    return this.state
+  },
+  setState : function(newState){
+    this.state = newState
+  }
+}
+
+
+
 todoInput.addEventListener('keydown', (e) => {
   // console.log(e)
   if (e.key === 'Enter') {
